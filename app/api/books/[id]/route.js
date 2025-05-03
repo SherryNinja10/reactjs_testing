@@ -7,6 +7,11 @@ export async function PUT(request, context) {
   const book = await request.json();
 
   const index = books.findIndex((b) => b.id === id);
+  if (index === -1) {
+    return Response.json({ error: "Book not found" }, { status: 404 });
+  }
+  console.log("index", index);
+  console.log("book", book);
   books[index] = book;
   
   return Response.json(books);
